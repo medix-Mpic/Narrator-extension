@@ -1,0 +1,8 @@
+fastapi==0.112.2
+numpy==1.22.0
+torch==2.2.2
+TTS==0.22.0
+TTS==0.22.0
+uvicorn==0.30.6
+websockets==13.0.1
+Requests==2.32.3

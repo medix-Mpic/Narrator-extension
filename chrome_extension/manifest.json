@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Narrator Extension",
+    "version": "1.0",
+    "description": "Select text and run the TTS model . You can choose between different realistic narrator voices . This app now uses your own pc to host the server",
+    "permissions": ["contextMenus", "activeTab", "scripting", "storage"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "images/logo-16.png",   
+        "48": "images/logo-48.png",  
+        "128": "images/logo-128.png"  
+      }
+      
+  }
+  

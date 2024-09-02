@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TTS Extension</title>
+  <style>
+    /* General body styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2e2e2e; /* Dark background */
+      color: #e0e0e0; /* Light text color */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #ff0000;
+    }
+
+
+ 
+  
+
+    /* Container for centering content */
+    .container, .loading-container {
+      background: #3b3b3b; /* Slightly lighter dark background */
+      border-radius: 8px;
+      flex-direction: column;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      width: 300px;
+      height: 300px;
+      text-align: center;
+    }
+
+    /* Color picker styles */
+    .color-picker {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      border: 0px;
+      background-color:#ffffff ; /* Default color */
+    }
+
+      /* GitHub icon styles */
+      .github-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+      /* GitHub icon styles */
+      .mpic-icon {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: auto;
+      height: 10px;
+      cursor: pointer;
+    }
+
+    /* Logo image style */
+    .logo {
+      width: 150px; /* Adjust width as needed */
+      height: auto; /* Maintain aspect ratio */
+      margin-bottom: 20px;
+    }
+
+    /* Heading style */
+    h3 {
+      color: #f0f0f0; /* Light heading color */
+      margin-bottom: 20px;
+    }
+
+    /* Button and dropdown styles */
+    button, select {
+      background-color: #6a6a6a; /* Blue button with dark theme */
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover, select:hover {
+      background-color: #f9174d; /* Darker blue on hover */
+    }
+
+    button:active, select:active {
+      background-color: #fb003c; /* Even darker blue on active */
+    }
+
+    /* Add some margin to the button and select */
+    button {
+      margin-top: 20px;
+    }
+
+    select {
+      width: 100%;
+      margin-top: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    /* Status light styles */
+    .status-light {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    .status-green {
+      background-color: #00ff00; /* Green for running */
+    }
+
+    .status-red {
+      background-color: #ff0000; /* Red for not running */
+    }
+
+
+
+    /* Playback speed slider styles */
+    .slider-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .slider-label {
+      display: block;
+      font-size: 14px; /* Smaller label */
+      margin-bottom: 5px;
+    }
+
+    .slider-value {
+      font-size: 14px; /* Smaller value display */
+      margin-bottom: 10px;
+    }
+
+    input[type="range"] {
+      width: 75%; /* Center the slider */
+      margin:  0 auto;
+      accent-color: #f9174d;
+    
+    }
+
+    /* Loading screen styles */
+    .loading-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .loading-message {
+      font-size: 18px;
+      color: #ff0000;
+      padding: 35px;
+
+      margin-top: 10px; /* Add margin to the top of the text */
+    }
+
+    .loader {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 6rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .loader:before,
+    .loader:after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      animation: pulsOut 1.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 1rem rgba(255, 86, 86, 0.75));
+    }
+
+    .loader:before {
+      width: 100%;
+      padding-bottom: 100%;
+      box-shadow: inset 0 0 0 1rem #ff0000;
+      animation-name: pulsIn;
+    }
+
+    .loader:after {
+      width: calc(100% - 2rem);
+      padding-bottom: calc(100% - 2rem);
+      box-shadow: 0 0 0 0 #ff0000;
+    }
+
+    @keyframes pulsIn {
+      0% {
+        box-shadow: inset 0 0 0 1rem #ff0000;
+        opacity: 1;
+      }
+      50%, 100% {
+        box-shadow: inset 0 0 0 0 #ff0000;
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulsOut {
+      0%, 50% {
+        box-shadow: 0 0 0 0 #ff0000;
+        opacity: 0;
+      }
+      100% {
+        box-shadow: 0 0 0 1rem #ff0000;
+        opacity: 1;
+      }
+    }
+        
+  </style>
+</head>
+<body>
+   <!-- GitHub Icon -->
+  <a href="https://github.com/medix-Mpic" target="_blank" title="Narrator Extension Repo">
+    <img src="images/github.png" alt="GitHub" class="github-icon" >
+  </a>
+  <!-- Loading screen -->
+  <div class="loading-container" id="loadingContainer">
+    <span class="loader"></span>
+    <div class="loading-message">TTS Model Loading...</div> <!-- Centralized loading message -->
+  </div>
+
+  <!-- Main content -->
+  <div class="container" id="mainContainer">
+    <img src="images/narrator.png" alt="Narrator Logo" class="logo">
+    <h3>Select text and run TTS model</h3>
+    <div id="statusContainer">
+      <span class="status-light" id="serverStatus"></span>
+      <span id="statusMessage">Checking server status...</span>
+    </div>
+    <select id="voiceSelect">
+      <option value="Morgan" disabled selected hidden>Choose the narrator</option>
+      <option value="Morgan">Morgan</option>
+      <option value="Hopkins">Hopkins</option>
+      <option value="Simmons">Simmons</option>
+      <option value="Claribel">Claribel</option>
+      <option value="Dave">Dave</option>
+      <option value="Daisy">Daisy Studious</option>
+      <option value="Gracie">Gracie Wise</option>
+      <option value="Tammie">Tammie Ema</option>
+      <option value="Alison">Alison Dietlinde</option>
+      <option value="Ana">Ana Florence</option>
+      <!-- Add more options as needed -->
+    </select>
+    <div class="slider-container">
+      <span class="slider-label">Playback Speed</span>
+      <span id="speedValue" class="slider-value">1.0x</span>
+      <input type="range" id="speedSlider" min="1" max="2" step="0.2" value="1.0">
+    </div>
+    <button id="runTTS">Run TTS</button>
+    <button id="stopTTS">Stop TTS</button> <!-- Stop button -->
+    <img src="images/-mpic.png" alt="mpic prod" class="mpic-icon">
+    <input type="color" id="colorPicker" class="color-picker" value="#f9174d" title="Text Highlighting Color">
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
