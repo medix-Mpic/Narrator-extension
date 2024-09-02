@@ -2,7 +2,7 @@
 # 🎙️ Narrator-extension![Narrator](https://github.com/user-attachments/assets/f28ed7f3-15b8-491e-9640-557dfabac68b)
 
 
-This is an extension that reads text from any tab with lifelike, expressive voices. It’s like having your own personal narrator, perfect for hands-free reading or giving your eyes a break.
+This is an extension that reads text from any tab with lifelike, expressive voices. It’s like having your own personal narrator, perfect for turning your reading into a cinematic experience or allowing you to multitask while still consuming information.
 
 
 
